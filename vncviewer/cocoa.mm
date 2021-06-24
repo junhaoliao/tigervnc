@@ -152,6 +152,13 @@ void cocoa_win_zoom(Fl_Window *win)
   [nsw zoom:nsw];
 }
 
+float cocoa_get_win_backing_scale_factor(Fl_Window *win)
+{
+    NSWindow *nsw;
+    nsw = (NSWindow*)fl_xid(win);
+    return (float)([nsw backingScaleFactor]);
+}
+
 int cocoa_is_keyboard_event(const void *event)
 {
   NSEvent *nsevent;

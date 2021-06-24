@@ -141,6 +141,8 @@ void Surface::draw(int src_x, int src_y, int x, int y, int w, int h)
   // Reset the transformation matrix back to the default identity
   // matrix as otherwise we get a massive performance hit
   CGContextConcatCTM(fl_gc, CGAffineTransformInvert(CGContextGetCTM(fl_gc)));
+  float scale_factor = cocoa_get_win_backing_scale_factor(Fl_Window::current());
+  CGContextScaleCTM(fl_gc, scale_factor, scale_factor);
 
   // macOS Coordinates are from bottom left, not top left
   y = Fl_Window::current()->h() - (y + h);
@@ -177,6 +179,8 @@ void Surface::blend(int src_x, int src_y, int x, int y, int w, int h, int a)
   // Reset the transformation matrix back to the default identity
   // matrix as otherwise we get a massive performance hit
   CGContextConcatCTM(fl_gc, CGAffineTransformInvert(CGContextGetCTM(fl_gc)));
+  float scale_factor = cocoa_get_win_backing_scale_factor(Fl_Window::current());
+  CGContextScaleCTM(fl_gc, scale_factor, scale_factor);
 
   // macOS Coordinates are from bottom left, not top left
   y = Fl_Window::current()->h() - (y + h);
